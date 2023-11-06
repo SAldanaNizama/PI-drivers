@@ -1,3 +1,3 @@
-DB_USER=usuariodepostgres
-DB_PASSWORD=passwordDePostgres
-DB_HOST=localhost
+DB_USER=Drivers
+DB_PASSWORD=1234
+DB_HOST=5432
