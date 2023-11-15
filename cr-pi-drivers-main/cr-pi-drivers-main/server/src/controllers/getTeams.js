@@ -3,6 +3,28 @@ const { Team } = require('./models');
 
 const app = express();
 
+
+app.get('/teams', async (req, res) => {
+  try {
+    const teams = await Team.findAll();
+
+    if (teams.length === 0) {
+      const apiTeams = await obtenerEquiposDesdeAPI();
+
+      if (apiTeams && apiTeams.length > 0) {
+        await Team.bulkCreate(apiTeams);
+        res.json(apiTeams);
+      } else {
+        res.status(404).json({ error: 'No se encontraron equipos en la API' });
+      }
+    } else {
+      res.json(teams);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener equipos' });
+  }
+});
 // Ruta para obtener la lista de equipos
 // app.get('/teams', async (req, res) => {
 //   try {
@@ -45,25 +67,3 @@ const app = express();
 // app.listen(PORT, () => {
 //   console.log(`Servidor en ejecución en el puerto ${PORT}`);
 // });
-
-app.get('/teams', async (req, res) => {
-  try {
-    const teams = await Team.findAll();
-
-    if (teams.length === 0) {
-      const apiTeams = await obtenerEquiposDesdeAPI();
-
-      if (apiTeams && apiTeams.length > 0) {
-        await Team.bulkCreate(apiTeams);
-        res.json(apiTeams);
-      } else {
-        res.status(404).json({ error: 'No se encontraron equipos en la API' });
-      }
-    } else {
-      res.json(teams);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error al obtener equipos' });
-  }
-});

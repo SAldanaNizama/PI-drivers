@@ -4,6 +4,30 @@ const { Op } = require('sequelize');
 
 const app = express();
 
+
+app.get('/drivers/name', async (req, res) => {
+  const { name } = req.query;
+  
+  try {
+    const drivers = await Driver.findAll({
+      where: {
+        Nombre: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
+      limit: 15,
+    });
+
+    if (drivers.length === 0) {
+      return res.status(404).json({ error: 'Conductores no encontrados' });
+    }
+
+    res.json(drivers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al buscar conductores' });
+  }
+});
 // Ruta para buscar conductores por nombre
 // app.get('/drivers/name', async (req, res) => {
 //   const { name } = req.query;
@@ -35,27 +59,3 @@ const app = express();
 // app.listen(PORT, () => {
 //   console.log(`Servidor en ejecución en el puerto ${PORT}`);
 // });
-
-app.get('/drivers/name', async (req, res) => {
-  const { name } = req.query;
-
-  try {
-    const drivers = await Driver.findAll({
-      where: {
-        Nombre: {
-          [Op.iLike]: `%${name}%`,
-        },
-      },
-      limit: 15,
-    });
-
-    if (drivers.length === 0) {
-      return res.status(404).json({ error: 'Conductores no encontrados' });
-    }
-
-    res.json(drivers);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error al buscar conductores' });
-  }
-});

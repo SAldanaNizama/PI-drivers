@@ -1,8 +1,26 @@
 const { axios } = require("axios") 
 const express = require('express');
-const { Driver } = require('./models'); // Asegúrate de importar el modelo Driver
+const { Driver } = require('./models'); 
 
 const app = express();
+
+
+app.get('/drivers', async (req, res) => {
+  try {
+    const drivers = await Driver.findAll();
+
+    drivers.forEach((driver) => {
+      if (!driver.Imagen) {
+        driver.Imagen = 'imagen_por_defecto.jpg';
+      }
+    });
+    
+    res.json(drivers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener conductores' });
+  }
+});
 
 // Ruta para obtener la lista de conductores
 // app.get('/drivers', async (req, res) => {
@@ -30,20 +48,3 @@ const app = express();
 // app.listen(PORT, () => {
 //   console.log(`Servidor en ejecución en el puerto ${PORT}`);
 // });
-
-app.get('/drivers', async (req, res) => {
-  try {
-    const drivers = await Driver.findAll();
-
-    drivers.forEach((driver) => {
-      if (!driver.Imagen) {
-        driver.Imagen = 'imagen_por_defecto.jpg';
-      }
-    });
-
-    res.json(drivers);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error al obtener conductores' });
-  }
-});

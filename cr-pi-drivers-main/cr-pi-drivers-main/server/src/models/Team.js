@@ -1,18 +1,10 @@
 const { DataTypes } = require('sequelize');
 
-// module.exports = (sequelize) => {
-//   sequelize.define('Team', {
-//     Nombre: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//   });
-// };
 module.exports = (sequelize) => {
   sequelize.define('Team', {
     ID: {
-      type: DataTypes.UUID, // Cambia el tipo de datos a UUID
-      defaultValue: DataTypes.UUIDV4, // Asigna un valor UUID por defecto
+      type: DataTypes.UUID, 
+      defaultValue: DataTypes.UUIDV4, 
       primaryKey: true,
       allowNull: false,
     },
@@ -22,3 +14,12 @@ module.exports = (sequelize) => {
     },
   });
 };
+
+// module.exports = (sequelize) => {
+//   sequelize.define('Team', {
+//     Nombre: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//   });
+// };
