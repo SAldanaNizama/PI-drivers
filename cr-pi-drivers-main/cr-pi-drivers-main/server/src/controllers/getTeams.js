@@ -1,7 +1,4 @@
-const express = require('express');
-const { Team } = require('../db');
 const axios = require("axios")
-const app = express();
 const URL = "http://localhost:5000/drivers"
 
 
