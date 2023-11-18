@@ -11,7 +11,9 @@ const {
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:5432/drivers`, {
   logging: false, 
   native: false, 
-});
+}); 
+console.log("sequelize inicio correctamente");
+
 
 createDriverTable(sequelize)
 createTeamTable(sequelize)

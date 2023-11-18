@@ -1,6 +1,6 @@
 
-const { Driver } = require('../models/Driver');
-const {Team} = require("../models/Team") 
+const { Driver } = require('../db');
+const {Team} = require("../db") 
     const getDriverById =  async (req, res) => {
       const { idDriver } = req.params;
     

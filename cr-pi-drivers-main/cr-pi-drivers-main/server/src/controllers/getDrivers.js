@@ -1,5 +1,5 @@
 const axios = require("axios")
-const { Driver } = require("../models/Driver")
+const { Driver } = require("../db")
 const URL = "http://localhost:5000/drivers"
 const getDrivers = async (req, res) => {
   try {
@@ -7,6 +7,7 @@ const getDrivers = async (req, res) => {
 
     const driverApi = (await axios(URL)).data;
     const drivers = await Driver.findAll();
+    console.log("usando el finall");
     if (driverApi && drivers) {
       const allDrivers = [...driverApi, ...drivers]
       return res.status(200).json({status:true, allDrivers})

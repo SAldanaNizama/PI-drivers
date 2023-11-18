@@ -1,9 +1,6 @@
 
-const { Driver } = require('../models/Driver'); // Asegúrate de importar el modelo Driver
+const { Driver } = require('../db'); // Asegúrate de importar el modelo Driver
 const { Op } = require('sequelize');
-
-
-
 
 const getDriversByName = async (req, res) => {
   const { name } = req.query;
