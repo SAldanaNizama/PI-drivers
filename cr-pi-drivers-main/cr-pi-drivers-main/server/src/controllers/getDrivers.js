@@ -1,50 +1,24 @@
-const { axios } = require("axios") 
-const express = require('express');
-const { Driver } = require('./models'); 
-
-const app = express();
-
-
-app.get('/drivers', async (req, res) => {
+const axios = require("axios")
+const { Driver } = require("../models/Driver")
+const URL = "http://localhost:5000/drivers"
+const getDrivers = async (req, res) => {
   try {
-    const drivers = await Driver.findAll();
+        console.log("Iniciando la obtención de conductores...");
 
-    drivers.forEach((driver) => {
-      if (!driver.Imagen) {
-        driver.Imagen = 'imagen_por_defecto.jpg';
-      }
-    });
-    
-    res.json(drivers);
+    const driverApi = (await axios(URL)).data;
+    const drivers = await Driver.findAll();
+    if (driverApi && drivers) {
+      const allDrivers = [...driverApi, ...drivers]
+      return res.status(200).json({status:true, allDrivers})
+    }
+   else {
+  return res.status(400).json({ status: false, message: "No se pudo obtener conductores" });
+}
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error al obtener conductores' });
   }
-});
+};
 
-// Ruta para obtener la lista de conductores
-// app.get('/drivers', async (req, res) => {
-//   try {
-//     // Consulta la base de datos para obtener la lista de conductores
-//     const drivers = await Driver.findAll();
-
-//     // Itera sobre los conductores y coloca una imagen por defecto si no tienen imagen
-//     drivers.forEach((driver) => {
-//       if (!driver.Imagen) {
-//         driver.Imagen = 'imagen_por_defecto.jpg'; // Ruta de la imagen por defecto
-//       }
-//     });
-
-//     res.json(drivers);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Error al obtener conductores' });
-//   }
-// });
-//por si aca
-
-// const PORT = process.env.PORT || 3000;
-
-// app.listen(PORT, () => {
-//   console.log(`Servidor en ejecución en el puerto ${PORT}`);
-// });
+module.exports = getDrivers;

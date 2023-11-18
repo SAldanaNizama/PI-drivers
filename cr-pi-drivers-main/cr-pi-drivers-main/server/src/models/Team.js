@@ -8,18 +8,10 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    Nombre: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   });
 };
 
-// module.exports = (sequelize) => {
-//   sequelize.define('Team', {
-//     Nombre: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//   });
-// };

@@ -1,40 +1,24 @@
-const { DataTypes } = require("sequelize")
+const { Sequelize, DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  sequelize.define('Driver', {
-    ID: {
+  sequelize.define('Driver',{
+    id: {
       type: DataTypes.UUID, 
-      defaultValue: DataTypes.UUIDV4, 
       primaryKey: true,
-      allowNull: false,
     },
-    Nombre: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Apellido: {
+    surname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Descripcion: DataTypes.TEXT,
-    Imagen: DataTypes.STRING,
-    Nacionalidad: DataTypes.STRING,
-    FechaNacimiento: DataTypes.DATE,
+    description: {
+     type: DataTypes.STRING,
+      allowNull:false,
+    },
+    image: DataTypes.STRING,
+    nationality: DataTypes.STRING,
+    dob: DataTypes.DATE,
   });
-};
-    
-    // module.exports = (sequelize) => {
-    //   sequelize.define('Driver', {
-    //     Nombre: {
-    //       type: DataTypes.STRING,
-    //       allowNull: false,
-    //     },
-    //     Apellido: {
-    //       type: DataTypes.STRING,
-    //       allowNull: false,
-    //     },
-    //     Descripcion: DataTypes.TEXT,
-    //     Imagen: DataTypes.STRING,
-    //     Nacionalidad: DataTypes.STRING,
-    //     FechaNacimiento: DataTypes.DATE,
-    //   });
-    // };
+};  
