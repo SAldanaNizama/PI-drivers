@@ -7,19 +7,6 @@ const getTeams = async (req, res) => {
   try {
     const teams = await obtenerEquiposDesdeAPI()
     res.json(teams)
-
-    // if (teams.length === 0) {
-    //   const apiTeams = await obtenerEquiposDesdeAPI();
-
-    //   if (apiTeams && apiTeams.length > 0) {
-    //     await Team.bulkCreate(apiTeams);
-    //     res.json(apiTeams);
-    //   } else {
-    //     res.status(404).json({ status: false, message: 'No se encontraron equipos en la API' });
-    //   }
-    // } else {
-    //   res.json(teams);
-    // }
   } catch (error) {
     console.error(error);
     res.status(500).json({ status: false, message: 'Error al obtener equipos', error: error.message });
