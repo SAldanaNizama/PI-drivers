@@ -51,7 +51,7 @@ export function adddriver(driver) {
     try {
       const { data } = await axios.post(`${URL_BASE}/driver`, driver)
       return dispatch({
-        type: adddriver,
+        type: ADD_DRIVER,
         payload: data
       })
     } catch (error) {
@@ -74,13 +74,15 @@ export function getDriverById(id) {
     }
   }
 }
-export function filterAndTemp(team) {
+export function filterAndTeam(team) {
   return {
     type: FILTER_TEAM,
     payload: team
   }
 }
-
+export function filterOrigin(data) {
+  
+}
 
 
 
