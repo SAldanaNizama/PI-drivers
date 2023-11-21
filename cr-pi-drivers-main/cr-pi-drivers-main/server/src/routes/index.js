@@ -8,7 +8,7 @@ router.get("/drivers/:id", getDriversId)
 router.get("/driver", getDriversName)
 router.get("/teams", getTeams)
 router.post("/drivers", postDrivers)
-router.delete("/drivers/:id", getDelete)
+// router.delete("/drivers/:id", getDelete)
 
 
 const driver = require("../models/Driver")
