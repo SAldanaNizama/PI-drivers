@@ -1,6 +1,5 @@
-
 const express = require("express");
-const router = require("./routes/index");
+const router = require("./routes/mainRouter");
 const morgan = require("morgan");
 const cors = require("cors");
 
